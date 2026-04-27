@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Pemesanan Boba</title>
+  <style>
+    body { font-family: Poppins, sans-serif; padding: 20px; }
+    form { max-width: 400px; margin: auto; }
+    input, button { width: 100%; padding: 10px; margin: 10px 0; }
+    button { background: #ff6f91; color: white; border: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+<h2>Form Pemesanan</h2>
+<form id="formPemesanan">
+  <label>Varian:</label>
+  <input type="text" id="nama" required>
+  
+  <label>Jumlah:</label>
+  <input type="number" id="jumlah" min="1" value="1" required>
+  
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const produk = urlParams.get("produk");
+  const harga = urlParams.get("harga");
+
+  document.getElementById("formPemesanan").addEventListener("submit", function(e){
+    e.preventDefault();
+    const nama = document.getElementById("nama").value;
+    const jumlah = document.getElementById("jumlah").value;
+    const total = harga * jumlah;
+
+    // Simpan data ke localStorage untuk ditampilkan di nota
+    localStorage.setItem("nota", JSON.stringify({
+      produk, harga, jumlah, nama, total
+    }));
+
+    // Redirect ke halaman nota
+    window.location.href = "nota.html";
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afrizal Boba Drink - Segar & Kenyal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff8f0;
+      color: #333;
+    }
+
+    nav {
+      background-color: #ff6f91;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav h1 { color: #fff; }
+
+    nav ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    header {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(135deg, #ff6f91, #ff9671);
+      color: white;
+    }
+
+    section {
+      padding: 60px 10%;
+      text-align: center;
+    }
+
+    .produk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .produk {
+      background: #fff;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .produk img {
+      width: 100%;
+      border-radius: 15px;
+    }
+
+    .harga {
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .btn-beli {
+      display: inline-block;
+      padding: 10px 25px;
+      background: #ff6f91;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 25px;
+    }
+
+    #kontak {
+      background: linear-gradient(135deg, #ff9671, #ff6f91);
+      color: white;
+      padding: 60px 20px;
+    }
+
+    .btn-wa {
+      padding: 12px 25px;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <h1>🧋 Afrizal Boba</h1>
+  <ul>
+    <li><a href="#koleksi">Menu</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h2>Segarnya Es Boba Drink</h2>
+  <p>Minuman kekinian dengan topping boba kenyal!</p>
+</header>
+
+<section id="koleksi">
+  <h2>Menu Favorit</h2>
+
+  <div class="produk-grid">
+
+    <div class="produk">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.YG6b7qhE8c44Fopze0MrrQAAAA">
+      <h3>Boba Kopi</h3>
+      <p class="harga">Rp 5000</p>
+      <a href="pemesanan.html?produk=Boba Kopi&harga=8000" class="btn-beli">Beli</a>
+    </div>
+
+    <div class="produk">
+      <img src="https://th.bing.com/th/id/OIP.n6uTJhuFsIr0BcmPGRMeNwHaHa">
+      <h3>Boba Taro</h3>
+      <p class="harga">Rp 6000</p>
+      <a href="pemesanan.html?produk=Boba Taro&harga=5000" class="btn-beli">Beli</a>
+    </div>
+
+    <div class="produk">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.WOeIn5LjlUiiKzN4nZlW1AHaHa">
+      <h3>Boba Matcha</h3>
+      <p class="harga">Rp 6000</p>
+      <a href="pemesanan.html?produk=Boba Matcha&harga=6000" class="btn-beli">Beli</a>
+    </div>
+
+    <div class="produk">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.cfa00QQ0PleEcboV_swkQQAAAA">
+      <h3>Boba Susu</h3>
+      <p class="harga">Rp 7000</p>
+      <a href="pemesanan.html?produk=Boba Susu&harga=7000" class="btn-beli">Beli</a>
+    </div>
+
+    <div class="produk">
+      <img src="https://th.bing.com/th/id/OIP.o8GYk5ZY3q-0lsqPvsxy3gHaHa">
+      <h3>Boba Cappuccino</h3>
+      <p class="harga">Rp 8000</p>
+      <a href="pemesanan.html" class="btn-beli">Beli</a>
+    </div>
+
+    <div class="produk">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.X80l68Mh7LiNjAAlMgURlgHaHa">
+      <h3>Boba Strawberry</h3>
+      <p class="harga">Rp 9 000</p>
+      <a href="pemesanan.html" class="btn-beli">Beli</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="kontak">
+  <h2>Kontak Kami</h2>
+  <a href="https://wa.me/6285815069248" class="btn-wa">Chat WhatsApp</a>
+</section>
+
+</body>
+</html>

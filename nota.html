@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Nota Pemesanan</title>
+  <style>
+    body { font-family: Poppins, sans-serif; padding: 20px; }
+    .nota { background: #fff8f0; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .btn-wa { display: inline-block; margin-top: 15px; padding: 10px 20px; background: #25D366; color: white; text-decoration: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+<h2>Nota Pemesanan</h2>
+<div class="nota" id="nota"></div>
+<a id="btnWa" class="btn-wa" target="_blank">Kirim ke WhatsApp</a>
+<script>
+  const data = JSON.parse(localStorage.getItem("nota"));
+  const notaDiv = document.getElementById("nota");
+
+  notaDiv.innerHTML = `
+    <p><strong>Nama:</strong> ${data.nama}</p>
+    <p><strong>Jumlah:</strong> ${data.jumlah}</p>
+  `;
+
+  const pesan = `Halo, saya ${data.nama} ingin pesan:\nJumlah: ${data.jumlah}`;
+  const noWa = "6285815069248"; 
+  document.getElementById("btnWa").href = `https://wa.me/${noWa}?text=${encodeURIComponent(pesan)}`;
+</script>
+</body>
+</html>
