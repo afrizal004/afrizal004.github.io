@@ -11,67 +11,99 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background-color: #fff8f0;
-      color: #333;
       text-align: center;
     }
 
     nav {
-      background-color: #ff6f91;
+      background-color: rgba(255, 111, 145, 0.9);
       padding: 15px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
     }
 
     nav h1 {
-      color: #fff;
+      color: white;
       margin: 0;
     }
-    
+
     .hero {
       height: 100vh;
+      background: url('https://t3.ftcdn.net/jpg/18/48/06/44/360_F_1848064469_Kga3GRTmJtmHdLLtwZpBGldYLrODHpDE.jpg') no-repeat center center/cover;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #ff6f91, #ff9671);
-      color: #fff;
+      position: relative;
+      color: white;
       padding: 20px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.15);
+      top: 0;
+      left: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1.5s ease;
     }
 
     .hero h2 {
       font-size: 3em;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     .hero p {
       max-width: 500px;
-      margin-bottom: 30px;
+      margin: 0 auto 25px;
+      font-size: 1.1em;
     }
 
     .btn-masuk {
-      padding: 15px 40px;
+      padding: 15px 35px;
       background-color: #ffe082;
       color: #333;
       text-decoration: none;
-      font-weight: bold;
       border-radius: 30px;
+      font-weight: bold;
       transition: 0.3s;
     }
 
     .btn-masuk:hover {
-      background-color: #fff;
+      background-color: white;
       color: #ff6f91;
-      transform: scale(1.05);
+      transform: scale(1.08);
     }
 
     footer {
       position: absolute;
       bottom: 20px;
       width: 100%;
-      color: #fff;
+      color: white;
       font-size: 0.9em;
+      z-index: 1;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -79,19 +111,22 @@
 <body>
 
 <nav>
-  <h1>🧋 Afrizal Boba</h1>
+  <h1>🧋 Afrizal Boba Drink</h1>
 </nav>
 
 <div class="hero">
-  <h2>Selamat Datang</h2>
-  <p>Minuman boba segar dengan rasa kekinian yang bikin nagih setiap hari!</p>
+  <div class="hero-content">
+    <h2>Selamat Datang</h2>
+    <p>
+      Segarnya boba drink dengan berbagai varian rasa modern, cocok dinikmati kapan saja!
+    </p>
+    <a href="halamanutama.html" class="btn-masuk">Masuk ke Menu</a>
+  </div>
 
-  <a href="halamanutama.html" class="btn-masuk">Masuk ke Menu</a>
+  <footer>
+    <p>© 2026 Afrizal Boba Drink</p>
+  </footer>
 </div>
-
-<footer>
-  <p>© 2026 Afrizal Boba Drink</p>
-</footer>
 
 </body>
 </html>

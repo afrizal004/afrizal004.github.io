@@ -1,47 +1,125 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Pemesanan Boba</title>
-  <style>
-    body { font-family: Poppins, sans-serif; padding: 20px; }
-    form { max-width: 400px; margin: auto; }
-    input, button { width: 100%; padding: 10px; margin: 10px 0; }
-    button { background: #ff6f91; color: white; border: none; border-radius: 5px; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Menu Pemesanan Boba Drink</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fdf2f2;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #6b4f4f;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #555;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            background: #25D366; /* Warna Hijau WA */
+            color: white;
+            border: none;
+            padding: 12px;
+            margin-top: 25px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #128C7E;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background: #e7ffe7;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Form Pemesanan</h2>
-<form id="formPemesanan">
-  <label>Varian:</label>
-  <input type="text" id="nama" required>
-  
-  <label>Jumlah:</label>
-  <input type="number" id="jumlah" min="1" value="1" required>
-  
-  <button type="submit">Submit</button>
-</form>
+<div class="container">
+    <h2>🍹 Menu Boba Drink</h2>
+
+    <label for="nama">Nama Pemesan:</label>
+    <input type="text" id="nama" placeholder="Tulis nama kamu...">
+
+    <label for="rasa">Pilih Rasa:</label>
+    <select id="rasa">
+        <option value="Chocolate">Chocolate 🍫</option>
+        <option value="Matcha">Matcha 🍵</option>
+        <option value="Strawberry">Strawberry 🍓</option>
+        <option value="Taro">Taro 💜</option>
+        <option value="Vanilla">Vanilla 🍦</option>
+    </select>
+
+    <label for="ukuran">Pilih Ukuran:</label>
+    <select id="ukuran">
+        <option value="180ml">180 ml (Reguler)</option>
+        <option value="220ml">220 ml (Large)</option>
+    </select>
+
+    <button onclick="kirimWA()">Kirim ke WhatsApp</button>
+
+    <div class="result" id="hasil" style="display:none;">
+        ✅ Sedang mengalihkan ke WhatsApp...
+    </div>
+</div>
 
 <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const produk = urlParams.get("produk");
-  const harga = urlParams.get("harga");
+    function kirimWA() {
+        // 1. Ambil data dari input
+        const nama = document.getElementById("nama").value;
+        const rasa = document.getElementById("rasa").value;
+        const ukuran = document.getElementById("ukuran").value;
 
-  document.getElementById("formPemesanan").addEventListener("submit", function(e){
-    e.preventDefault();
-    const nama = document.getElementById("nama").value;
-    const jumlah = document.getElementById("jumlah").value;
-    const total = harga * jumlah;
+        // 2. Validasi: Nama tidak boleh kosong
+        if(nama.trim() === "") {
+            alert("Silakan masukkan nama kamu terlebih dahulu!");
+            return;
+        } 
 
-    // Simpan data ke localStorage untuk ditampilkan di nota
-    localStorage.setItem("nota", JSON.stringify({
-      produk, harga, jumlah, nama, total
-    }));
+        const pesanTeks = 
+            "Halo Admin, saya ingin memesan Boba!%0A%0A" +
+            "*Detail Pesanan*%0A" +
+            "----------------------------%0A" +
+            " *Nama:* " + nama + "%0A" +
+            " *Rasa:* " + rasa + "%0A" +
+            " *Ukuran:* " + ukuran + "%0A" +
+            "----------------------------%0A%0A" +
+            "Mohon segera diproses ya, terima kasih!";
 
-    // Redirect ke halaman nota
-    window.location.href = "nota.html";
-  });
+        const url = "https://wa.me/6285815069248" + "?text=" + pesanTeks;
+
+        document.getElementById("hasil").style.display = "block";
+
+        window.open(url, '_blank').focus();
+    }
 </script>
 
 </body>
