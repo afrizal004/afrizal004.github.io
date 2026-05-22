@@ -1,125 +1,329 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Menu Pemesanan Boba Drink</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #fdf2f2;
-            padding: 20px;
-        }
-        .container {
-            max-width: 400px;
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin: auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #6b4f4f;
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-            color: #555;
-        }
-        select, input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            background: #25D366; /* Warna Hijau WA */
-            color: white;
-            border: none;
-            padding: 12px;
-            margin-top: 25px;
-            cursor: pointer;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #128C7E;
-        }
-        .result {
-            margin-top: 15px;
-            padding: 10px;
-            background: #e7ffe7;
-            border-radius: 5px;
-            text-align: center;
-            font-size: 14px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Menu Pemesanan Boba Drink</title>
+
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fdf2f2;
+    padding: 20px;
+}
+
+.container {
+    max-width: 500px;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin: auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #6b4f4f;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #555;
+}
+
+select, input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+button {
+    width: 100%;
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin-top: 25px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #128C7E;
+}
+
+.result {
+    margin-top: 15px;
+    padding: 10px;
+    background: #e7ffe7;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: pre-line;
+}
+
+canvas {
+    margin-top: 25px;
+}
+</style>
 </head>
+
 <body>
 
 <div class="container">
-    <h2>🍹 Menu Boba Drink</h2>
 
-    <label for="nama">Nama Pemesan:</label>
-    <input type="text" id="nama" placeholder="Tulis nama kamu...">
+<h2>🍹 Menu Boba Drink</h2>
 
-    <label for="rasa">Pilih Rasa:</label>
-    <select id="rasa">
-        <option value="Chocolate">Chocolate 🍫</option>
-        <option value="Matcha">Matcha 🍵</option>
-        <option value="Strawberry">Strawberry 🍓</option>
-        <option value="Taro">Taro 💜</option>
-        <option value="Vanilla">Vanilla 🍦</option>
-    </select>
+<label>Nama Pemesan:</label>
+<input type="text" id="nama">
 
-    <label for="ukuran">Pilih Ukuran:</label>
-    <select id="ukuran">
-        <option value="180ml">180 ml (Reguler)</option>
-        <option value="220ml">220 ml (Large)</option>
-    </select>
+<label>Pilih Rasa:</label>
+<select id="rasa">
+    <option value="kopi">Kopi</option>
+    <option value="taro">Taro</option>
+    <option value="matcha">Matcha</option>
+    <option value="susu">Susu</option>
+    <option value="cappuccino">Cappuccino</option>
+    <option value="strawberry">Strawberry</option>
+</select>
 
-    <button onclick="kirimWA()">Kirim ke WhatsApp</button>
+<label>Pilih Ukuran:</label>
+<select id="ukuran">
+    <option value="180">180 ml</option>
+    <option value="220">220 ml</option>
+</select>
 
-    <div class="result" id="hasil" style="display:none;">
-        ✅ Sedang mengalihkan ke WhatsApp...
-    </div>
+<button onclick="kirimWA()">Kirim ke WhatsApp</button>
+
+<div class="result" id="totalJual"></div>
+
+<!-- 📊 Diagram 180ml -->
+<canvas id="chart180"></canvas>
+
+<!-- 📊 Diagram 220ml -->
+<canvas id="chart220"></canvas>
+
 </div>
 
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
-    function kirimWA() {
-        // 1. Ambil data dari input
-        const nama = document.getElementById("nama").value;
-        const rasa = document.getElementById("rasa").value;
-        const ukuran = document.getElementById("ukuran").value;
 
-        // 2. Validasi: Nama tidak boleh kosong
-        if(nama.trim() === "") {
-            alert("Silakan masukkan nama kamu terlebih dahulu!");
-            return;
-        } 
+// daftar produk
+let produk = [
+    "kopi",
+    "taro",
+    "matcha",
+    "susu",
+    "cappuccino",
+    "strawberry"
+];
 
-        const pesanTeks = 
-            "Halo Admin, saya ingin memesan Boba!%0A%0A" +
-            "*Detail Pesanan*%0A" +
-            "----------------------------%0A" +
-            " *Nama:* " + nama + "%0A" +
-            " *Rasa:* " + rasa + "%0A" +
-            " *Ukuran:* " + ukuran + "%0A" +
-            "----------------------------%0A%0A" +
-            "Mohon segera diproses ya, terima kasih!";
+// warna beda tiap rasa
+let warna = [
+    "#8B4513", // kopi
+    "#9370DB", // taro
+    "#2E8B57", // matcha
+    "#FFB6C1", // susu
+    "#D2691E", // cappuccino
+    "#FF6347"  // strawberry
+];
 
-        const url = "https://wa.me/6285815069248" + "?text=" + pesanTeks;
+// 🔥 tambah penjualan
+function tambahPenjualan(rasa, ukuran) {
 
-        document.getElementById("hasil").style.display = "block";
+    let key = "jual_" + rasa;
 
-        window.open(url, '_blank').focus();
+    let data = JSON.parse(localStorage.getItem(key)) || {
+        s180: 0,
+        s220: 0
+    };
+
+    if (ukuran == "180") {
+        data.s180++;
+    } else {
+        data.s220++;
     }
+
+    localStorage.setItem(key, JSON.stringify(data));
+}
+
+// 📋 tampilkan data
+function tampilkanPenjualan() {
+
+    let hasil = "";
+
+    produk.forEach(rasa => {
+
+        let data = JSON.parse(localStorage.getItem("jual_" + rasa)) || {
+            s180:0,
+            s220:0
+        };
+
+        let total = data.s180 + data.s220;
+
+        hasil += "🍹 " + rasa.toUpperCase() + "\n";
+        hasil += "180ml : " + data.s180 + "\n";
+        hasil += "220ml : " + data.s220 + "\n";
+        hasil += "TOTAL : " + total + "\n\n";
+    });
+
+    document.getElementById("totalJual").innerText = hasil;
+}
+
+// 📊 ambil data chart
+function ambilDataChart() {
+
+    let data180 = [];
+    let data220 = [];
+
+    produk.forEach(rasa => {
+
+        let data = JSON.parse(localStorage.getItem("jual_" + rasa)) || {
+            s180:0,
+            s220:0
+        };
+
+        data180.push(data.s180);
+        data220.push(data.s220);
+    });
+
+    return {
+        data180,
+        data220
+    };
+}
+
+let chart180;
+let chart220;
+
+// 🎨 tampilkan diagram
+function tampilkanChart() {
+
+    let hasil = ambilDataChart();
+
+    // hapus chart lama
+    if (chart180) chart180.destroy();
+    if (chart220) chart220.destroy();
+
+    // 📊 chart 180ml
+    let ctx180 = document.getElementById("chart180").getContext("2d");
+
+    chart180 = new Chart(ctx180, {
+
+        type: "bar",
+
+        data: {
+            labels: [
+                "Kopi",
+                "Taro",
+                "Matcha",
+                "Susu",
+                "Cappuccino",
+                "Strawberry"
+            ],
+
+            datasets: [{
+                label: "Terjual 180ml",
+                data: hasil.data180,
+                backgroundColor: warna
+            }]
+        },
+
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: "Diagram Penjualan 180ml"
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // 📊 chart 220ml
+    let ctx220 = document.getElementById("chart220").getContext("2d");
+
+    chart220 = new Chart(ctx220, {
+
+        type: "bar",
+
+        data: {
+            labels: [
+                "Kopi",
+                "Taro",
+                "Matcha",
+                "Susu",
+                "Cappuccino",
+                "Strawberry"
+            ],
+
+            datasets: [{
+                label: "Terjual 220ml",
+                data: hasil.data220,
+                backgroundColor: warna
+            }]
+        },
+
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: "Diagram Penjualan 220ml"
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+function kirimWA() {
+
+    const nama = document.getElementById("nama").value;
+    const rasa = document.getElementById("rasa").value;
+    const ukuran = document.getElementById("ukuran").value;
+
+    if (nama.trim() === "") {
+        alert("Isi nama dulu!");
+        return;
+    }
+
+    tambahPenjualan(rasa, ukuran);
+
+    tampilkanPenjualan();
+    tampilkanChart();
+
+    let pesan =
+    "Halo Admin,%0A" +
+    "Nama: " + nama + "%0A" +
+    "Rasa: " + rasa + "%0A" +
+    "Ukuran: " + ukuran + "ml";
+
+    window.open(
+        "https://wa.me/6285815069248?text=" + pesan,
+        "_blank"
+    );
+}
+
+// load awal
+tampilkanPenjualan();
+tampilkanChart();
+
 </script>
 
 </body>

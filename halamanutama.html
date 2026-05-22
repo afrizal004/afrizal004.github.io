@@ -5,23 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Afrizal Boba Drink - Segar & Kenyal</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background-color: #fff8f0;
+      background-color: #f909a5;
       color: #333;
     }
 
     nav {
-      background-color: #ff6f91;
+      background: url('https://images.unsplash.com/photo-1558857563-c0c27f6e5f5c') center/cover no-repeat;
       padding: 15px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    nav h1 { color: #fff; }
+    nav h1 { color: #f71dd2; }
 
     nav ul {
       display: flex;
@@ -38,8 +39,9 @@
     header {
       text-align: center;
       padding: 100px 20px;
-      background: linear-gradient(135deg, #ff6f91, #ff9671);
+      background: url('https://tse4.mm.bing.net/th/id/OIP.49WNI8wbAUaX_t7HVPHOTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3') center/cover no-repeat;
       color: white;
+      position: relative;
     }
 
     section {
@@ -66,11 +68,6 @@
       border-radius: 15px;
     }
 
-    .harga {
-      font-weight: bold;
-      margin: 10px 0;
-    }
-
     .btn-beli {
       display: inline-block;
       padding: 10px 25px;
@@ -81,9 +78,10 @@
     }
 
     #kontak {
-      background: linear-gradient(135deg, #ff9671, #ff6f91);
+      background: url('https://tse4.mm.bing.net/th/id/OIP.49WNI8wbAUaX_t7HVPHOTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3') center/cover no-repeat;
       color: white;
       padding: 60px 20px;
+      position: relative;
     }
 
     .btn-wa {
@@ -92,6 +90,23 @@
       color: white;
       text-decoration: none;
       border-radius: 25px;
+    }
+
+    header::before,
+    #kontak::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+    }
+
+    header *,
+    #kontak * {
+      position: relative;
+      z-index: 1;
     }
   </style>
 </head>
@@ -119,43 +134,38 @@
     <div class="produk">
       <img src="https://tse1.mm.bing.net/th/id/OIP.YG6b7qhE8c44Fopze0MrrQAAAA">
       <h3>Boba Kopi</h3>
-      <p class="harga">
       <p>180ml - Rp 5.000</p>
       <p>220ml - Rp 6.000</p>
-      <a href="pemesanan.html?produk=Boba Kopi&harga=8000" class="btn-beli">Beli</a>
+      <a href="pemesanan.html" class="btn-beli">Beli</a>
     </div>
 
     <div class="produk">
       <img src="https://th.bing.com/th/id/OIP.n6uTJhuFsIr0BcmPGRMeNwHaHa">
       <h3>Boba Taro</h3>
-      <p class="harga">
       <p>180ml - Rp 5.000</p>
       <p>220ml - Rp 7.000</p>
-      <a href="pemesanan.html?produk=Boba Taro&harga=5000" class="btn-beli">Beli</a>
+      <a href="pemesanan.html" class="btn-beli">Beli</a>
     </div>
 
     <div class="produk">
       <img src="https://tse3.mm.bing.net/th/id/OIP.WOeIn5LjlUiiKzN4nZlW1AHaHa">
       <h3>Boba Matcha</h3>
-      <p class="harga">
       <p>180ml - Rp 6.000</p>
       <p>220ml - Rp 7.000</p>
-      <a href="pemesanan.html?produk=Boba Matcha&harga=6000" class="btn-beli">Beli</a>
+      <a href="pemesanan.html" class="btn-beli">Beli</a>
     </div>
 
     <div class="produk">
       <img src="https://tse3.mm.bing.net/th/id/OIP.cfa00QQ0PleEcboV_swkQQAAAA">
       <h3>Boba Susu</h3>
-      <p class="harga">
       <p>180ml - Rp 6.000</p>
       <p>220ml - Rp 8.000</p>
-      <a href="pemesanan.html?produk=Boba Susu&harga=7000" class="btn-beli">Beli</a>
+      <a href="pemesanan.html" class="btn-beli">Beli</a>
     </div>
 
     <div class="produk">
       <img src="https://th.bing.com/th/id/OIP.o8GYk5ZY3q-0lsqPvsxy3gHaHa">
       <h3>Boba Cappuccino</h3>
-      <p class="harga">
       <p>180ml - Rp 6.000</p>
       <p>220ml - Rp 8.000</p>
       <a href="pemesanan.html" class="btn-beli">Beli</a>
@@ -164,7 +174,6 @@
     <div class="produk">
       <img src="https://tse2.mm.bing.net/th/id/OIP.X80l68Mh7LiNjAAlMgURlgHaHa">
       <h3>Boba Strawberry</h3>
-      <p class="harga">
       <p>180ml - Rp 6.000</p>
       <p>220ml - Rp 9.000</p>
       <a href="pemesanan.html" class="btn-beli">Beli</a>
